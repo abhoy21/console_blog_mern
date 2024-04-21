@@ -11,7 +11,7 @@ export default function DashboardPost() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await fetch(`/post/getposts?userId=${currentUser._id}`);
+        const res = await fetch(`/api/post/getposts?userId=${currentUser._id}`);
         const data = await res.json();
         if (res.ok) {
           setUserPosts(data.posts);
@@ -33,7 +33,7 @@ export default function DashboardPost() {
     const startIndex = userPosts.length;
     try {
       const res = await fetch(
-        `/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`,
+        `/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`,
       );
       const data = await res.json();
       if (res.ok) {

@@ -12,4 +12,5 @@ services:
     region: Singapore
     plan: free
     healthCheckPath: /health
+    buildCommand: npm install --prefix ./server
     autoDeploy: true

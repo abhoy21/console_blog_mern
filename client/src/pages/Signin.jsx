@@ -45,12 +45,14 @@ export default function SignIn() {
       }
 
       const data = await res.json();
+      console.log(data.token);
       if (data.success === false) {
         dispatch(signInFailure(data.message));
       }
 
       if (res.ok) {
         dispatch(signInSuccess(data));
+        console.log("success", data.token);
         localStorage.setItem("token", data.token);
         const notify = () => toast.success("Sign In Successful");
         notify();

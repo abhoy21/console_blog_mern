@@ -51,6 +51,7 @@ export default function SignIn() {
 
       if (res.ok) {
         dispatch(signInSuccess(data));
+        localStorage.setItem("token", data.token);
         const notify = () => toast.success("Sign In Successful");
         notify();
         navigate("/");

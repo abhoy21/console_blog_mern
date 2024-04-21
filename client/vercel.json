@@ -4,9 +4,9 @@
     { "src": "*.js", "use": "@vercel/next" }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "server/index.js" }
+    { "src": "/(.*)", "dest": "../server/index.js" }
   ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.js" }
+    { "source": "/(.*)", "dest": "../server/index.js" }
   ]
 }

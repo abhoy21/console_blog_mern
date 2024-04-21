@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: client
+    env: static
+    staticPublishPath: ./client/out
+    buildCommand: npm install --prefix ./client && npm run build --prefix ./client
+    pullRequestPreviewsEnabled: true
+
+  - type: web
+    name: server
+    env: node
+    region: Singapore
+    plan: free
+    healthCheckPath: /health
+    autoDeploy: true

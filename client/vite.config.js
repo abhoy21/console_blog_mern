@@ -8,7 +8,7 @@ export default defineConfig({
       "/api": {
         target: [
           "http://localhost:8080",
-          "https://console-blog-mern-api.vercel.app/",
+          "https://console-blog-mern-api.vercel.app",
         ],
         secure: false,
         changeOrigin: true,

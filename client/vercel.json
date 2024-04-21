@@ -5,6 +5,8 @@
   ],
   "routes": [
     { "src": "/(.*)", "dest": "../server/index.js" }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "dest": "../server/index.js" }
   ]
- 
 }

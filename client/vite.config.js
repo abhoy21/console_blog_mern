@@ -6,8 +6,12 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:8080",
+        target: [
+          "http://localhost:8080",
+          "https://console-blog-mern-api.vercel.app/",
+        ],
         secure: false,
+        changeOrigin: true,
       },
     },
   },

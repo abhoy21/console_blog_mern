@@ -5,7 +5,7 @@ import authRoutes from "./routes/auth.route.js";
 import postRoutes from "./routes/post.route.js";
 import commentRoutes from "./routes/comment.route.js";
 import cookieParser from "cookie-parser";
-import path from "path";
+import cors from "cors";
 
 const DB =
   "mongodb+srv://abhoy21:uVulIqyzajS85wkZ@cluster0.41dn67u.mongodb.net/console_blog()?retryWrites=true&w=majority&appName=Cluster0";
@@ -21,6 +21,14 @@ mongoose
 
 const app = express();
 const port = 8080;
+
+app.use(
+  cors({
+    origin: ["https://console-blog-mern-frontend.vercel.app/"],
+    methods: ["POST", "GET", "PUT", "DELETE"],
+    credentials: true,
+  }),
+);
 
 app.use(express.json());
 app.use(cookieParser());

@@ -1,12 +1,5 @@
 {
-  "version": 2,
-  "builds": [
-    { "src": "*.js", "use": "@vercel/next" }
-  ],
-  "routes": [
-    { "src": "/(.*)", "dest": "../server/index.js" }
-  ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "../server/index.js" }
+    { "source": "/(.*)", "destination": "/" }
   ]
 }

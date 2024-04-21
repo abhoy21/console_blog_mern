@@ -1,7 +1,8 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
+// client/vite.config.js
 
-// https://vitejs.dev/config/
+import react from "@vitejs/plugin-react-swc";
+import { defineConfig } from "vite";
+
 export default defineConfig({
   server: {
     proxy: {
@@ -12,4 +13,7 @@ export default defineConfig({
     },
   },
   plugins: [react()],
+  build: {
+    outDir: "../public", // This will place the build output in the "public" directory
+  },
 });

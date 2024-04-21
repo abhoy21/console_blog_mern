@@ -33,10 +33,10 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/api/user", userRoutes);
-app.use("/api/auth", authRoutes);
-app.use("/api/post", postRoutes);
-app.use("/api/comment", commentRoutes);
+app.use("https://console-blog-mern-api.vercel.app/api/user", userRoutes);
+app.use("https://console-blog-mern-api.vercel.app/api/auth", authRoutes);
+app.use("https://console-blog-mern-api.vercel.app/api/post", postRoutes);
+app.use("https://console-blog-mern-api.vercel.app/api/comment", commentRoutes);
 
 // app.use(express.static(path.join(__dirname, "../client/dist")));
 

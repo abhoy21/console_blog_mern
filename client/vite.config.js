@@ -3,15 +3,15 @@ import react from "@vitejs/plugin-react-swc";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  // server: {
-  //   proxy: {
-  //     "https://console-blog-mern-api.vercel.app/api": {
-  //       target: "https://console-blog-mern-api.vercel.app",
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:8080",
 
-  //       secure: false,
-  //       changeOrigin: true,
-  //     },
-  //   },
-  // },
+        secure: false,
+        changeOrigin: true,
+      },
+    },
+  },
   plugins: [react()],
 });

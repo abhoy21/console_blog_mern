@@ -31,14 +31,11 @@ export default function SignIn() {
 
     try {
       dispatch(signInStart());
-      const res = await fetch(
-        "https://console-blog-mern-api.vercel.app/api/auth/signin",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        },
-      );
+      const res = await fetch("/api/auth/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
       console.log(await res.json());
       if (!res.ok) {
         throw new Error("Failed to sign in");

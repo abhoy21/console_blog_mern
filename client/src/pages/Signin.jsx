@@ -39,8 +39,8 @@ export default function SignIn() {
           body: JSON.stringify(formData),
         },
       );
-      console.log(await res.json());
-      console.log(res.token);
+      // console.log(await res.json());
+      // console.log(res.token);
       if (!res.ok) {
         throw new Error("Failed to sign in");
       }

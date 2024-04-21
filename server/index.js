@@ -17,7 +17,7 @@ mongoose
     console.log(error);
   });
 
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 
 const app = express();
 const port = 8080;
@@ -30,11 +30,11 @@ app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/comment", commentRoutes);
 
-app.use(express.static(path.join(__dirname, "../client/dist")));
+// app.use(express.static(path.join(__dirname, "../client/dist")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client", "dist", "index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../client", "dist", "index.html"));
+// });
 
 // Error handler middleware
 app.use((err, req, res, next) => {

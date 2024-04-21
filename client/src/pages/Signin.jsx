@@ -40,6 +40,7 @@ export default function SignIn() {
         },
       );
       console.log(await res.json());
+      console.log(await res.json().token);
       if (!res.ok) {
         throw new Error("Failed to sign in");
       }

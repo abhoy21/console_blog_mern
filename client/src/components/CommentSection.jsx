@@ -101,9 +101,15 @@ export default function CommentSection({ postId }) {
         navigate("/sign-in");
         return;
       }
-      const res = await fetch(`/comment/deleteComment/${commentId}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `https://console-blog-mern-api.vercel.app/api/comment/deleteComment/${commentId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
       if (res.ok) {
         const data = await res.json();
         setComments(comments.filter((comment) => comment._id !== commentId));

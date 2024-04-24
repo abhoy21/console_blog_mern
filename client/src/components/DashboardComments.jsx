@@ -34,7 +34,7 @@ export default function DashboardComments() {
         const token = localStorage.getItem("token");
         console.log("header tokens: " + token);
         const res = await fetch(
-          `https://console-blog-mern-api.vercel.app/api/comment/getcomments/${currentUser._id}`,
+          `https://console-blog-mern-api.vercel.app/api/comment/getcomments`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

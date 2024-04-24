@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signoutSuccess } from "../redux/user/userSlice";
 
 export default function DashboardSidebar() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
   const location = useLocation();
   const [tab, settab] = useState("");
@@ -17,20 +18,26 @@ export default function DashboardSidebar() {
     }
   }, [location.search]);
 
-  const handleSignout = async () => {
-    try {
-      const res = await fetch("/user/signout", {
-        method: "POST",
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        console.log(data.message);
-      } else {
-        dispatch(signoutSuccess());
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
+  // const handleSignout = async () => {
+  //   try {
+  //     const res = await fetch("/user/signout", {
+  //       method: "POST",
+  //     });
+  //     const data = await res.json();
+  //     if (!res.ok) {
+  //       console.log(data.message);
+  //     } else {
+  //       dispatch(signoutSuccess());
+  //     }
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
+
+  const handleSignout = () => {
+    localStorage.removeItem("token");
+    navigate("/sign-in");
+    dispatch(signoutSuccess());
   };
 
   return (
@@ -91,67 +98,70 @@ export default function DashboardSidebar() {
           </a>
 
           {/*  user show comments */}
-
-          <a href='/dashboard?tab=comments'>
-            <div
-              role='button'
-              tabIndex={0}
-              className='flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:rounded-full hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-blue-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none'
-            >
-              <div
-                className={`grid place-items-center p-2 rounded-full ${
-                  tab === "comments" ? "bg-sky-500" : "bg-sky-100"
-                }`}
-              >
-                <svg
-                  className='h-6 w-6 md:h-12 md:w-12 text-sky-500'
-                  fill={tab === "comments" ? "white" : "currentColor"}
-                  version='1.1'
-                  id='Layer_1'
-                  xmlns='http://www.w3.org/2000/svg'
-                  viewBox='0 0 32 32'
+          {currentUser.isAdmin && (
+            <>
+              <a href='/dashboard?tab=comments'>
+                <div
+                  role='button'
+                  tabIndex={0}
+                  className='flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:rounded-full hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-blue-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none'
                 >
-                  <polygon
-                    fill='none'
-                    stroke={tab === "comments" ? "white" : "currentColor"}
-                    strokeWidth='2'
-                    strokeMiterlimit='10'
-                    points='4,7 4,25 13,25 16,28 19,25 28,25 28,7 '
-                  />
-                  <line
-                    fill='none'
-                    stroke={tab === "comments" ? "white" : "currentColor"}
-                    strokeWidth='2'
-                    strokeMiterlimit='10'
-                    x1='9'
-                    y1='12'
-                    x2='23'
-                    y2='12'
-                  />
-                  <line
-                    fill='none'
-                    stroke={tab === "comments" ? "white" : "currentColor"}
-                    strokeWidth='2'
-                    strokeMiterlimit='10'
-                    x1='9'
-                    y1='16'
-                    x2='23'
-                    y2='16'
-                  />
-                  <line
-                    fill='none'
-                    stroke={tab === "comments" ? "white" : "currentColor"}
-                    strokeWidth='2'
-                    strokeMiterlimit='10'
-                    x1='9'
-                    y1='20'
-                    x2='19'
-                    y2='20'
-                  />
-                </svg>
-              </div>
-            </div>
-          </a>
+                  <div
+                    className={`grid place-items-center p-2 rounded-full ${
+                      tab === "comments" ? "bg-sky-500" : "bg-sky-100"
+                    }`}
+                  >
+                    <svg
+                      className='h-6 w-6 md:h-12 md:w-12 text-sky-500'
+                      fill={tab === "comments" ? "white" : "currentColor"}
+                      version='1.1'
+                      id='Layer_1'
+                      xmlns='http://www.w3.org/2000/svg'
+                      viewBox='0 0 32 32'
+                    >
+                      <polygon
+                        fill='none'
+                        stroke={tab === "comments" ? "white" : "currentColor"}
+                        strokeWidth='2'
+                        strokeMiterlimit='10'
+                        points='4,7 4,25 13,25 16,28 19,25 28,25 28,7 '
+                      />
+                      <line
+                        fill='none'
+                        stroke={tab === "comments" ? "white" : "currentColor"}
+                        strokeWidth='2'
+                        strokeMiterlimit='10'
+                        x1='9'
+                        y1='12'
+                        x2='23'
+                        y2='12'
+                      />
+                      <line
+                        fill='none'
+                        stroke={tab === "comments" ? "white" : "currentColor"}
+                        strokeWidth='2'
+                        strokeMiterlimit='10'
+                        x1='9'
+                        y1='16'
+                        x2='23'
+                        y2='16'
+                      />
+                      <line
+                        fill='none'
+                        stroke={tab === "comments" ? "white" : "currentColor"}
+                        strokeWidth='2'
+                        strokeMiterlimit='10'
+                        x1='9'
+                        y1='20'
+                        x2='19'
+                        y2='20'
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            </>
+          )}
 
           {/* admin user show users */}
           {currentUser.isAdmin && (

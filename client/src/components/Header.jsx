@@ -27,7 +27,7 @@ export default function Header() {
 
   // const handleSignout = async () => {
   //   try {
-  //     const res = await fetch("/user/signout", {
+  //     const res = await fetch("https://console-blog-mern-frontend.vercel.app/api/user/signout", {
   //       method: "POST",
   //     });
   //     const data = await res.json();

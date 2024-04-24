@@ -165,20 +165,28 @@ export default function DashboardProfile() {
     }
   };
 
-  const handleSignout = async () => {
-    try {
-      const res = await fetch("/user/signout", {
-        method: "POST",
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        console.log(data.message);
-      } else {
-        dispatch(signoutSuccess());
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
+  // const handleSignout = async () => {
+  //   try {
+  //     const res = await fetch(
+  //       "https://console-blog-mern-frontend.vercel.app/api/user/signout",
+  //       {
+  //         method: "POST",
+  //       },
+  //     );
+  //     const data = await res.json();
+  //     if (!res.ok) {
+  //       console.log(data.message);
+  //     } else {
+  //       dispatch(signoutSuccess());
+  //     }
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
+  const handleSignout = () => {
+    localStorage.removeItem("token");
+    navigate("/sign-in");
+    dispatch(signoutSuccess());
   };
 
   return (

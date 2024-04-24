@@ -9,19 +9,51 @@ export default function DashboardComments() {
   const [showModal, setShowModal] = useState(false);
   const [commentIdToDelete, setCommentIdToDelete] = useState("");
 
+  // useEffect(() => {
+  //   const fetchComments = async () => {
+  //     try {
+  //       const res = await fetch(`https://console-blog-mern-api.vercel.app/api/comment/getcomments`);
+  //       const data = await res.json();
+  //       if (res.ok) {
+  //         setComments(data.comments);
+  //         if (data.comments.length < 9) {
+  //           setShowMore(false);
+  //         }
+  //       }
+  //     } catch (error) {
+  //       console.log(error.message);
+  //     }
+  //   };
+
+  //   fetchComments();
+  // }, [currentUser._id]);
+
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const res = await fetch(`/comment/getcomments`);
+        const token = localStorage.getItem("token");
+
+        const res = await fetch(
+          `https://console-blog-mern-api.vercel.app/api/comment/getcomments`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
         const data = await res.json();
         if (res.ok) {
           setComments(data.comments);
           if (data.comments.length < 9) {
             setShowMore(false);
           }
+        } else {
+          // Handle error response
+          console.error("Error fetching comments:", data.error);
         }
       } catch (error) {
-        console.log(error.message);
+        console.log("Error fetching comments:", error.message);
       }
     };
 

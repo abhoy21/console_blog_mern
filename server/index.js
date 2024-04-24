@@ -24,7 +24,7 @@ const port = 8080;
 
 app.use(
   cors({
-    origin: ["https://console-blog-mern-frontend.vercel.app"],
+    origin: true,
     methods: ["POST", "GET"],
     credentials: true,
   }),

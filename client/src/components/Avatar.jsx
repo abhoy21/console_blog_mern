@@ -1,28 +1,34 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signoutSuccess } from "../redux/user/userSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function Avatar() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
 
-  const handleSignout = async () => {
-    try {
-      const res = await fetch("/user/signout", {
-        method: "POST",
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        console.log(data.message);
-      } else {
-        dispatch(signoutSuccess());
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
+  // const handleSignout = async () => {
+  //   try {
+  //     const res = await fetch("/user/signout", {
+  //       method: "POST",
+  //     });
+  //     const data = await res.json();
+  //     if (!res.ok) {
+  //       console.log(data.message);
+  //     } else {
+  //       dispatch(signoutSuccess());
+  //     }
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
+  const handleSignout = () => {
+    localStorage.removeItem("token");
+    navigate("/sign-in");
+    dispatch(signoutSuccess());
   };
-
   return (
     <div>
       <div className='flex justify-center items-center'>

@@ -115,6 +115,7 @@ export default function CommentSection({ postId }) {
   };
 
   const handleDelete = async (commentId) => {
+    const token = localStorage.getItem("token");
     setShowModal(false);
     try {
       if (!currentUser) {

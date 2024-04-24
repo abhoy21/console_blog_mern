@@ -15,8 +15,16 @@ export default function DashboardComp() {
   const { currentUser } = useSelector((state) => state.user);
   useEffect(() => {
     const fetchUsers = async () => {
+      const token = localStorage.getItem("token");
       try {
-        const res = await fetch("/user/getusers?limit=5");
+        const res = await fetch(
+          "https://console-blog-mern-api.vercel.app/api/user/getusers?limit=5",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
         const data = await res.json();
         if (res.ok) {
           setUsers(data.users);
@@ -29,7 +37,9 @@ export default function DashboardComp() {
     };
     const fetchPosts = async () => {
       try {
-        const res = await fetch("/api/post/getposts?limit=5");
+        const res = await fetch(
+          "https://console-blog-mern-api.vercel.app/api/api/post/getposts?limit=5",
+        );
         const data = await res.json();
         if (res.ok) {
           setPosts(data.posts);
@@ -41,8 +51,16 @@ export default function DashboardComp() {
       }
     };
     const fetchComments = async () => {
+      const token = localStorage.getItem("token");
       try {
-        const res = await fetch("/comment/getcomments?limit=5");
+        const res = await fetch(
+          "https://console-blog-mern-api.vercel.app/api/comment/getcomments?limit=5",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
         const data = await res.json();
         if (res.ok) {
           setComments(data.comments);

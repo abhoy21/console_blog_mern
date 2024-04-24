@@ -38,7 +38,7 @@ export default function DashboardComp() {
     const fetchPosts = async () => {
       try {
         const res = await fetch(
-          "https://console-blog-mern-api.vercel.app/api/api/post/getposts?limit=5",
+          "https://console-blog-mern-api.vercel.app/api/post/getposts?limit=5",
         );
         const data = await res.json();
         if (res.ok) {

@@ -81,12 +81,13 @@ export const googleAuth = async (req, res, next) => {
       );
       console.log(token);
       const { password, ...rest } = user._doc;
-      res
-        .status(200)
-        .cookie("access_token", token, {
-          httpOnly: true,
-        })
-        .json(rest);
+      // res
+      //   .status(200)
+      //   .cookie("access_token", token, {
+      //     httpOnly: true,
+      //   })
+      //   .json(rest);
+      res.status(200).json({ ...rest, token });
     } else {
       const generatedPassword = email + Math.random().toString(36).slice(-8);
 
@@ -104,12 +105,13 @@ export const googleAuth = async (req, res, next) => {
         "secret_key",
       );
       const { password, ...rest } = newUser._doc;
-      res
-        .status(200)
-        .cookie("access_token", token, {
-          httpOnly: true,
-        })
-        .json(rest);
+      // res
+      //   .status(200)
+      //   .cookie("access_token", token, {
+      //     httpOnly: true,
+      //   })
+      //   .json(rest);
+      res.status(200).json({ ...rest, token });
     }
   } catch (error) {
     next(error);

@@ -58,7 +58,7 @@ export default function Header() {
   return (
     <>
       <div className='flex items-center justify-center p-4 z-55'>
-        <div className='w-full lg:w-3/4 bg-gray-300 bg-opacity-20 backdrop-blur-lg border-2 border-white flex items-center justify-between px-4 rounded-[50px]'>
+        <div className='w-full lg:w-[85%] bg-gray-300 bg-opacity-20 backdrop-blur-lg border-2 border-white flex items-center justify-between px-4 rounded-[50px]'>
           <a href='/'>
             <div className='flex items-center space-x-4'>
               <img

@@ -41,21 +41,9 @@ export default function Header() {
   //   }
   // };
 
-  const handleSignout = async () => {
-    try {
-      const res = await fetch("/user/signout", {
-        method: "POST",
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        console.log(data);
-      } else {
-        localStorage.removeItem("access_token");
-        dispatch(signoutSuccess());
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
+  const handleSignout = () => {
+    localStorage.removeItem("access_token");
+    dispatch(signoutSuccess());
   };
 
   const handleSubmit = (e) => {

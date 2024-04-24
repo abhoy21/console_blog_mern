@@ -32,7 +32,7 @@ export default function DashboardComments() {
     const fetchComments = async () => {
       try {
         const token = localStorage.getItem("token");
-
+        console.log("header tokens: " + token);
         const res = await fetch(
           `https://console-blog-mern-api.vercel.app/api/comment/getcomments`,
           {

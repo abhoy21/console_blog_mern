@@ -17,21 +17,26 @@ export default function CommentSection({ postId }) {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("token");
     if (comment.length > 200) {
       return;
     }
     try {
-      const res = await fetch("/comment/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const res = await fetch(
+        "https://console-blog-mern-api.vercel.app/api/comment/create",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            content: comment,
+            postId,
+            userId: currentUser._id,
+          }),
         },
-        body: JSON.stringify({
-          content: comment,
-          postId,
-          userId: currentUser._id,
-        }),
-      });
+      );
       const data = await res.json();
       if (res.ok) {
         setComment("");
@@ -45,8 +50,16 @@ export default function CommentSection({ postId }) {
 
   useEffect(() => {
     const getComments = async () => {
+      const token = localStorage.getItem("token");
       try {
-        const res = await fetch(`/comment/getPostComments/${postId}`);
+        const res = await fetch(
+          `https://console-blog-mern-api.vercel.app/api/comment/getPostComments/${postId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
         if (res.ok) {
           const data = await res.json();
           setComments(data);
@@ -59,14 +72,21 @@ export default function CommentSection({ postId }) {
   }, [postId]);
 
   const handleLike = async (commentId) => {
+    const token = localStorage.getItem("token");
     try {
       if (!currentUser) {
         navigate("/sign-in");
         return;
       }
-      const res = await fetch(`/comment/likeComment/${commentId}`, {
-        method: "PUT",
-      });
+      const res = await fetch(
+        `https://console-blog-mern-api.vercel.app/api/comment/likeComment/${commentId}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
       if (res.ok) {
         const data = await res.json();
         setComments(

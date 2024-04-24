@@ -9,9 +9,17 @@ export default function DashboardUsers() {
   const [userIdToDelete, setUserIdToDelete] = useState("");
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     const fetchUsers = async () => {
       try {
-        const res = await fetch(`/user/getusers`);
+        const res = await fetch(
+          `https://console-blog-mern-api.vercel.app/api/user/getusers`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
         const data = await res.json();
         if (res.ok) {
           setUsers(data.users);
@@ -31,8 +39,16 @@ export default function DashboardUsers() {
 
   const handleShowMore = async () => {
     const startIndex = users.length;
+    const token = localStorage.getItem("token");
     try {
-      const res = await fetch(`/user/getusers?startIndex=${startIndex}`);
+      const res = await fetch(
+        `https://console-blog-mern-api.vercel.app/api/user/getusers?startIndex=${startIndex}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
       const data = await res.json();
       if (res.ok) {
         setUsers((prev) => [...prev, ...data.users]);
@@ -46,10 +62,17 @@ export default function DashboardUsers() {
   };
 
   const handleDeleteUser = async () => {
+    const token = localStorage.getItem("token");
     try {
-      const res = await fetch(`/user/delete/${userIdToDelete}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `https://console-blog-mern-api.vercel.app/api/user/delete/${userIdToDelete}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
       const data = await res.json();
       if (res.ok) {
         setUsers((prev) => prev.filter((user) => user._id !== userIdToDelete));

@@ -117,13 +117,20 @@ export default function DashboardProfile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("token");
     try {
       dispatch(updateStart());
-      const res = await fetch(`/user/update/${currentUser._id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `https://console-blog-mern-api.vercel.app/api/user/update/${currentUser._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(formData),
+        },
+      );
       const data = await res.json();
       if (!res.ok) {
         dispatch(updateFailure(data.message));
@@ -139,6 +146,7 @@ export default function DashboardProfile() {
   };
 
   const handleDeleteUser = async () => {
+    const token = localStorage.getItem("token");
     setShowModal(false);
     try {
       dispatch(deleteUserStart());
@@ -147,9 +155,15 @@ export default function DashboardProfile() {
         const imageRef = ref(imageDB, photoURL);
         await deleteObject(imageRef);
       }
-      const res = await fetch(`/user/delete/${currentUser._id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `https://console-blog-mern-api.vercel.app/api/user/delete/${currentUser._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
       const data = await res.json();
       if (!res.ok) {
         dispatch(deleteUserFailure(data.message));

@@ -13,7 +13,9 @@ const Comment = ({ comment, onLike, onEdit, onDelete }) => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const res = await fetch(`/user/${comment.userId}`);
+        const res = await fetch(
+          `https://console-blog-mern-api.vercel.app/api/user/${comment.userId}`,
+        );
         const data = await res.json();
         if (res.ok) {
           setUser(data);
@@ -32,15 +34,20 @@ const Comment = ({ comment, onLike, onEdit, onDelete }) => {
 
   const handleSave = async () => {
     try {
-      const res = await fetch(`/comment/editComment/${comment._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
+      const token = localStorage.getItem("token");
+      const res = await fetch(
+        `https://console-blog-mern-api.vercel.app/api/comment/editComment/${comment._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            content: editedContent,
+          }),
         },
-        body: JSON.stringify({
-          content: editedContent,
-        }),
-      });
+      );
       if (res.ok) {
         setIsEditing(false);
         onEdit(comment, editedContent);

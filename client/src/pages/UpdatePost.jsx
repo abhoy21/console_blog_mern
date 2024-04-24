@@ -71,7 +71,9 @@ export default function UpdatePost() {
   useEffect(() => {
     try {
       const fetchPost = async () => {
-        const res = await fetch(`/api/post/getposts?postId=${postId}`);
+        const res = await fetch(
+          `https://console-blog-mern-api.vercel.app/api/post/getposts?postId=${postId}`,
+        );
         const data = await res.json();
         if (!res.ok) {
           console.log(data.message);
@@ -175,13 +177,16 @@ export default function UpdatePost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const token = localStorage.getItem("token");
     try {
       const res = await fetch(
-        `/post/updatepost/${formData._id}/${currentUser._id}`,
+        `https://console-blog-mern-api.vercel.app/api/post/updatepost/${formData._id}/${currentUser._id}`,
         {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
           body: JSON.stringify(formData),
         },
       );

@@ -42,7 +42,8 @@ export default function Header() {
   // };
 
   const handleSignout = () => {
-    localStorage.removeItem("access_token");
+    localStorage.removeItem("token");
+    navigate("/sign-in");
     dispatch(signoutSuccess());
   };
 

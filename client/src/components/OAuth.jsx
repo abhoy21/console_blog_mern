@@ -33,6 +33,7 @@ export default function OAuth() {
       const data = await res.json();
       if (res.ok) {
         dispatch(signInSuccess(data));
+        localStorage.setItem("token", data.token);
         const notify = () => toast.success("Sign In Successful with Google");
         notify();
         navigate("/");

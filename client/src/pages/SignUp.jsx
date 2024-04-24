@@ -40,11 +40,14 @@ export default function SignUp() {
 
     try {
       setLoading(true);
-      const res = await fetch("/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, photo: imageURL }),
-      });
+      const res = await fetch(
+        "https://console-blog-mern-api.vercel.app/api/auth/signup",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...formData, photo: imageURL }),
+        },
+      );
       if (!res.ok) {
         throw new Error("Failed to sign up");
       }
